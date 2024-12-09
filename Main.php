@@ -28,7 +28,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">HavenHunt</a>
-        <img src="Havent Hunt.jpg" height="150" alt="HavenHunt Logo">
+        <img src="images/Havent Hunt.jpg" height="150" alt="HavenHunt Logo">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -88,7 +88,7 @@
         <!-- Property Card 1 -->
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src="Coral Homes.jpg" class="card-img-top" height="300px" alt="Modern Family Home">
+                <img src="images/Coral Homes.jpg" class="card-img-top" height="300px" alt="Modern Family Home">
                 <div class="card-body">
                     <h5 class="card-title">Modern Family Home</h5>
                     <p class="card-text">Located in a serene neighborhood with great amenities.</p>
@@ -100,7 +100,7 @@
         <!-- Property Card 2 -->
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src="triton-luxury-villa.jpg" class="card-img-top" height="300px" alt="Luxury Villa">
+                <img src="images/triton-luxury-villa.jpg" class="card-img-top" height="300px" alt="Luxury Villa">
                 <div class="card-body">
                     <h5 class="card-title">Luxury Villa</h5>
                     <p class="card-text">A spacious villa with stunning ocean views and a private pool.</p>
@@ -112,7 +112,7 @@
         <!-- Property Card 3 -->
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src="Midtown.jpg" class="card-img-top" height="300px" alt="City Apartment">
+                <img src="images/Midtown.jpg" class="card-img-top" height="300px" alt="City Apartment">
                 <div class="card-body">
                     <h5 class="card-title">City Apartment</h5>
                     <p class="card-text">A modern apartment in the heart of the city with top-notch facilities.</p>
@@ -131,7 +131,7 @@
         <!-- Land Card 1 -->
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src="Great_Farm_Lands.jpg" class="card-img-top" height="300px" alt="Farm Land">
+                <img src="images/Great_Farm_Lands.jpg" class="card-img-top" height="300px" alt="Farm Land">
                 <div class="card-body">
                     <h5 class="card-title">Farm Land</h5>
                     <p class="card-text">A vast expanse of fertile land perfect for farming or investment.</p>
@@ -143,7 +143,7 @@
         <!-- Land Card 2 -->
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src="Vacant Lands.jpg" class="card-img-top" height="300px" alt="Beachfront Land">
+                <img src="images/Vacant Lands.jpg" class="card-img-top" height="300px" alt="Beachfront Land">
                 <div class="card-body">
                     <h5 class="card-title">Beachfront Land</h5>
                     <p class="card-text">Prime beachfront property perfect for commercial or private use.</p>
@@ -155,7 +155,7 @@
         <!-- Land Card 3 -->
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src="Lands.jpg" class="card-img-top" height="300px" alt="Residential Land">
+                <img src="images/Lands.jpg" class="card-img-top" height="300px" alt="Residential Land">
                 <div class="card-body">
                     <h5 class="card-title">Residential Land</h5>
                     <p class="card-text">Perfectly located land for residential development in a peaceful area.</p>
