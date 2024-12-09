@@ -9,7 +9,7 @@
     <style>
         /* Header Background Image */
         header {
-            background-image: url('unnamed.jpg'); /* Replace with your background image */
+            background-image: url('images/unnamed.jpg'); /* Replace with your background image */
             background-size: cover;
             background-position: center;
             color: white;
