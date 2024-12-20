@@ -2,7 +2,7 @@
     require_once 'connection/connection.php';
 ?>
 <?php
-    session_start();
+    //session_start();
     if(isset($_POST["login"])){
         $email = mysqli_real_escape_string($connection,$_POST["email"]);
         $password = mysqli_real_escape_string($connection,$_POST["password"]);
@@ -39,16 +39,16 @@
     <div class="row">
         <div class="col-md-6">
             <h3>Login</h3>
-            <form>
+            <form method="POST" action ="Main.php">
                 <div class="mb-3">
                     <label for="loginEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="loginEmail" required>
+                    <input type="email" name="email" class="form-control" id="loginEmail" required>
                 </div>
                 <div class="mb-3">
                     <label for="loginPassword" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="loginPassword" required>
+                    <input type="password" name="password" class="form-control" id="loginPassword" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" name="login"  class="btn btn-primary">Login</button>
             </form>
         </div>
         <div class="col-md-6">
