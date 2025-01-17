@@ -1,37 +1,37 @@
 <?php
-// Include database connection
+
 include('connection/connection.php');
 
-// Initialize variables for the form inputs
+
 $location = isset($_GET['location']) ? $_GET['location'] : '';
 $min_price = isset($_GET['min_price']) ? $_GET['min_price'] : '';
 $max_price = isset($_GET['max_price']) ? $_GET['max_price'] : '';
 $property_type = isset($_GET['property_type']) ? $_GET['property_type'] : '';
 
-// Construct the SQL query
+
 $sql = "SELECT p.Property_ID, p.Property_Name, p.Description, p.Price, p.Image_Name, pt.Type_Name
         FROM properties p
         JOIN property_types pt ON p.Type_ID = pt.Type_ID
         WHERE 1";
 
-// Apply filters if they are set
+
 if ($location != '') {
-    $sql .= " AND p.Title LIKE '%" . $location . "%'"; // Location filter (Title contains location)
+    $sql .= " AND p.Title LIKE '%" . $location . "%'"; 
 }
 
 if ($min_price != '') {
-    $sql .= " AND p.Price >= " . $min_price; // Min price filter
+    $sql .= " AND p.Price >= " . $min_price; 
 }
 
 if ($max_price != '') {
-    $sql .= " AND p.Price <= " . $max_price; // Max price filter
+    $sql .= " AND p.Price <= " . $max_price; 
 }
 
 if ($property_type != '') {
-    $sql .= " AND p.Type_ID = '" . $property_type . "'"; // Property type filter
+    $sql .= " AND p.Type_ID = '" . $property_type . "'"; 
 }
 
-// Execute the query
+
 $result = $connection->query($sql);
 ?>
 
@@ -44,16 +44,16 @@ $result = $connection->query($sql);
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Header Background Image */
+        
         header {
-            background-image: url('images/unnamed.jpg'); /* Replace with your background image */
+            background-image: url('images/unnamed.jpg'); 
             background-size: cover;
             background-position: center;
             color: white;
         }
 
         header .container {
-            background: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay for better readability */
+            background: rgba(0, 0, 0, 0.6); 
             padding: 2rem;
             border-radius: 10px;
         }
@@ -124,7 +124,7 @@ $result = $connection->query($sql);
     <h2 class="text-center">Available Properties</h2>
     <div class="row">
         <?php
-        // Check if any results were found
+       
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="col-md-4 mb-4">
@@ -176,5 +176,5 @@ $result = $connection->query($sql);
 </html>
 
 <?php
-// You can add any footer or dynamic PHP content here
+
 ?>
