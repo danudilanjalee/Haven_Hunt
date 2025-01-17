@@ -1,5 +1,5 @@
 <?php
-// You can add PHP code here if needed for any dynamic content or logic.
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
