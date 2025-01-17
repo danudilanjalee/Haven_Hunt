@@ -1,3 +1,40 @@
+<?php
+// Include database connection
+include('connection/connection.php');
+
+// Initialize variables for the form inputs
+$location = isset($_GET['location']) ? $_GET['location'] : '';
+$min_price = isset($_GET['min_price']) ? $_GET['min_price'] : '';
+$max_price = isset($_GET['max_price']) ? $_GET['max_price'] : '';
+$property_type = isset($_GET['property_type']) ? $_GET['property_type'] : '';
+
+// Construct the SQL query
+$sql = "SELECT p.Property_ID, p.Property_Name, p.Description, p.Price, p.Image_Name, pt.Type_Name
+        FROM properties p
+        JOIN property_types pt ON p.Type_ID = pt.Type_ID
+        WHERE 1";
+
+// Apply filters if they are set
+if ($location != '') {
+    $sql .= " AND p.Title LIKE '%" . $location . "%'"; // Location filter (Title contains location)
+}
+
+if ($min_price != '') {
+    $sql .= " AND p.Price >= " . $min_price; // Min price filter
+}
+
+if ($max_price != '') {
+    $sql .= " AND p.Price <= " . $max_price; // Max price filter
+}
+
+if ($property_type != '') {
+    $sql .= " AND p.Type_ID = '" . $property_type . "'"; // Property type filter
+}
+
+// Execute the query
+$result = $connection->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,6 +74,7 @@
                 <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li> <!-- Link to Home -->
                 <li class="nav-item"><a class="nav-link" href="#listings">Listings</a></li>
                 <li class="nav-item"><a class="nav-link" href="#lands">Lands</a></li>
+                <li class="nav-item"><a class="nav-link" href="about_us.php">About Us</a></li> <!-- Link to About Us -->
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li> <!-- Link to Contact -->
                 <li class="nav-item"><a class="nav-link btn btn-primary text-white" href="login.php">Login/Register</a></li>
                 <li class="nav-item"><a class="btn btn-success ms-2 text-white" href="details.php">Enter Details</a></li> <!-- Link to Details -->
@@ -57,22 +95,22 @@
 <!-- Search Filter -->
 <section class="container py-5">
     <h2 class="text-center">Search Properties</h2>
-    <form class="row g-3">
+    <form class="row g-3" method="GET" action="main.php">
         <div class="col-md-3">
-            <input type="text" class="form-control" placeholder="Location">
+            <input type="text" class="form-control" name="location" value="<?php echo $location; ?>" placeholder="Location">
         </div>
         <div class="col-md-3">
-            <input type="number" class="form-control" placeholder="Min Price">
+            <input type="number" class="form-control" name="min_price" value="<?php echo $min_price; ?>" placeholder="Min Price">
         </div>
         <div class="col-md-3">
-            <input type="number" class="form-control" placeholder="Max Price">
+            <input type="number" class="form-control" name="max_price" value="<?php echo $max_price; ?>" placeholder="Max Price">
         </div>
         <div class="col-md-3">
-            <select class="form-select">
-                <option selected>Property Type</option>
-                <option value="1">House</option>
-                <option value="2">Apartment</option>
-                <option value="3">Land</option>
+            <select class="form-select" name="property_type">
+                <option value="">Select Property Type</option>
+                <option value="1" <?php echo ($property_type == '1') ? 'selected' : ''; ?>>House</option>
+                <option value="2" <?php echo ($property_type == '2') ? 'selected' : ''; ?>>Apartment</option>
+                <option value="3" <?php echo ($property_type == '3') ? 'selected' : ''; ?>>Land</option>
             </select>
         </div>
         <div class="col-12 text-center">
@@ -82,88 +120,29 @@
 </section>
 
 <!-- Listings Section -->
-<section id="listings" class="container py-5">
+<section class="container py-5" id="properties">
     <h2 class="text-center">Available Properties</h2>
     <div class="row">
-        <!-- Property Card 1 -->
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <img src="images/Coral Homes.jpg" class="card-img-top" height="300px" alt="Modern Family Home">
-                <div class="card-body">
-                    <h5 class="card-title">Modern Family Home</h5>
-                    <p class="card-text">Located in a serene neighborhood with great amenities.</p>
-                    <p class="card-text"><strong>LKR 75,000,000</strong></p>
-                    <a href="#" class="btn btn-primary">View Details</a>
-                </div>
-            </div>
-        </div>
-        <!-- Property Card 2 -->
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <img src="images/triton-luxury-villa.jpg" class="card-img-top" height="300px" alt="Luxury Villa">
-                <div class="card-body">
-                    <h5 class="card-title">Luxury Villa</h5>
-                    <p class="card-text">A spacious villa with stunning ocean views and a private pool.</p>
-                    <p class="card-text"><strong>LKR 450,000,000</strong></p>
-                    <a href="#" class="btn btn-primary">View Details</a>
-                </div>
-            </div>
-        </div>
-        <!-- Property Card 3 -->
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <img src="images/Midtown.jpg" class="card-img-top" height="300px" alt="City Apartment">
-                <div class="card-body">
-                    <h5 class="card-title">City Apartment</h5>
-                    <p class="card-text">A modern apartment in the heart of the city with top-notch facilities.</p>
-                    <p class="card-text"><strong>LKR 200,000,000</strong></p>
-                    <a href="#" class="btn btn-primary">View Details</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Lands Section -->
-<section id="lands" class="container py-5">
-    <h2 class="text-center">Lands for Sale</h2>
-    <div class="row">
-        <!-- Land Card 1 -->
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <img src="images/Great_Farm_Lands.jpg" class="card-img-top" height="300px" alt="Farm Land">
-                <div class="card-body">
-                    <h5 class="card-title">Farm Land</h5>
-                    <p class="card-text">A vast expanse of fertile land perfect for farming or investment.</p>
-                    <p class="card-text"><strong>LKR 25,000,000</strong></p>
-                    <a href="#" class="btn btn-primary">View Details</a>
-                </div>
-            </div>
-        </div>
-        <!-- Land Card 2 -->
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <img src="images/Vacant Lands.jpg" class="card-img-top" height="300px" alt="Beachfront Land">
-                <div class="card-body">
-                    <h5 class="card-title">Beachfront Land</h5>
-                    <p class="card-text">Prime beachfront property perfect for commercial or private use.</p>
-                    <p class="card-text"><strong>LKR 50,000,000</strong></p>
-                    <a href="#" class="btn btn-primary">View Details</a>
-                </div>
-            </div>
-        </div>
-        <!-- Land Card 3 -->
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <img src="images/Lands.jpg" class="card-img-top" height="300px" alt="Residential Land">
-                <div class="card-body">
-                    <h5 class="card-title">Residential Land</h5>
-                    <p class="card-text">Perfectly located land for residential development in a peaceful area.</p>
-                    <p class="card-text"><strong>LKR 40,000,000</strong></p>
-                    <a href="#" class="btn btn-primary">View Details</a>
-                </div>
-            </div>
-        </div>
+        <?php
+        // Check if any results were found
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="images/' . $row['Image_Name'] . '" class="card-img-top" height="300px" alt="' . $row['Property_Name'] . '">
+                            <div class="card-body">
+                                <h5 class="card-title">' . $row['Property_Name'] . '</h5>
+                                <p class="card-text">' . $row['Description'] . '</p>
+                                <p class="card-text"><strong>LKR ' . number_format($row['Price'], 2) . '</strong></p>
+                                <a href="#" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                      </div>';
+            }
+        } else {
+            echo '<p class="text-center">No properties found based on your criteria.</p>';
+        }
+        ?>
     </div>
 </section>
 
@@ -195,3 +174,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<?php
+// You can add any footer or dynamic PHP content here
+?>
