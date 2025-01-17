@@ -1,11 +1,11 @@
 
 <?php
-    //$hostname = "127.0.0.1";
-    //$username = "root";
-    //$password = "mariadb";
-    //$dbname = "havenhunt";
+    $hostname = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "havenhunt";
 
-    //$connection = mysqli_connect($hostname,$username,$password,$dbname);
+    $connection = mysqli_connect($hostname,$username,$password,$dbname);
 ?>
 
     
