@@ -1,14 +1,12 @@
 <?php
     require_once 'connection/connection.php';
-?>
-<?php
-    //session_start();
+    session_start();
     if(isset($_POST["login"])){
         $email = mysqli_real_escape_string($connection,$_POST["email"]);
         $password = mysqli_real_escape_string($connection,$_POST["password"]);
 
         if($email != "" && $password != ""){
-            $sql1 = "SELECT * FROM users WHERE email='{$email}' AND password='{$password}'";
+            $sql1 = "SELECT * FROM login WHERE email='{$email}' AND password='{$password}'";
 
             $result_set1 = mysqli_query($connection,$sql1);
 
@@ -21,7 +19,6 @@
         }
     }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +36,7 @@
     <div class="row">
         <div class="col-md-6">
             <h3>Login</h3>
-            <form method="POST" action ="Main.php">
+            <form method="POST" action="main.php">
                 <div class="mb-3">
                     <label for="loginEmail" class="form-label">Email</label>
                     <input type="email" name="email" class="form-control" id="loginEmail" required>
@@ -48,25 +45,25 @@
                     <label for="loginPassword" class="form-label">Password</label>
                     <input type="password" name="password" class="form-control" id="loginPassword" required>
                 </div>
-                <button type="submit" name="login"  class="btn btn-primary">Login</button>
+                <button type="submit" name="login" class="btn btn-primary">Login</button>
             </form>
         </div>
         <div class="col-md-6">
             <h3>Register</h3>
-            <form>
+            <form method="POST" action="register.php">
                 <div class="mb-3">
                     <label for="registerName" class="form-label">Full Name</label>
-                    <input type="text" class="form-control" id="registerName" required>
+                    <input type="text" name="fullname" class="form-control" id="registerName" required>
                 </div>
                 <div class="mb-3">
                     <label for="registerEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="registerEmail" required>
+                    <input type="email" name="email" class="form-control" id="registerEmail" required>
                 </div>
                 <div class="mb-3">
                     <label for="registerPassword" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="registerPassword" required>
+                    <input type="password" name="password" class="form-control" id="registerPassword" required>
                 </div>
-                <button type="submit" class="btn btn-success">Register</button>
+                <button type="submit" name="register" class="btn btn-success">Register</button>
             </form>
         </div>
     </div>
